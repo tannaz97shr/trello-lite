@@ -6,34 +6,22 @@
 .addRow {
   display: flex;
   gap: var(--space-sm);
+  align-items: center;
 }
 
 .input {
+  /* used as className on shared Input -> only layout additions here */
   flex: 1;
-
-  border-radius: var(--radius-md);
-  padding: var(--space-xs) var(--space-sm);
-
-  border: var(--border-width) solid var(--border);
-  background: var(--panel);
-  color: inherit;
-
-  outline: none;
-
-  transition: border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-
-  &:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
-  }
+  min-width: 0;
 }
 
 .primary {
+  height: 40px;
+  padding: 0 var(--space-md);
   border-radius: var(--radius-md);
-  padding: var(--space-xs) var(--space-md);
 
-  border: var(--border-width) solid var(--border);
+  border: var(--border-width) solid
+    color-mix(in srgb, var(--accent) 35%, var(--border));
   background: var(--accent);
   color: #fff;
 
@@ -45,6 +33,12 @@
 
   &:active {
     transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: none;
   }
 }
 
@@ -67,33 +61,48 @@
 
 .commentText {
   flex: 1;
+  min-width: 0;
+
   font-size: 13px;
   line-height: 1.45;
   color: var(--text);
+
+  word-break: break-word;
 }
 
 .danger {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-sm);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
 
   border: var(--border-width) solid color-mix(in srgb, #ef4444 55%, transparent);
-  background: color-mix(in srgb, #ef4444 18%, transparent);
-  color: inherit;
+  background: color-mix(in srgb, #ef4444 14%, transparent);
+  color: var(--text);
 
   transition: background var(--transition-fast),
     transform var(--transition-fast);
 
   &:hover {
-    background: color-mix(in srgb, #ef4444 28%, transparent);
+    background: color-mix(in srgb, #ef4444 22%, transparent);
   }
 
   &:active {
     transform: translateY(1px);
   }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #ef4444 25%, transparent);
+  }
 }
 
 .empty {
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+
+  background: var(--panel-muted);
+  border: var(--border-width) solid var(--border);
+
   color: var(--text-muted);
   font-size: 13px;
 }

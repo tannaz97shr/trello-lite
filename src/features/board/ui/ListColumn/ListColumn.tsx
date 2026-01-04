@@ -6,10 +6,12 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
+import { ConfirmDialog } from "@/shared/components/feedback/ConfirmDialog/ConfirmDialog";
 import { EmptyState } from "@/shared/components/feedback/EmptyState/EmptyState";
 import { Button, IconButton } from "@/shared/components/ui";
+
 import { toDndCardId } from "../../lib/dnd/ids";
 import type { CardEntity, CardId, ListEntity, ListId } from "../../model/types";
 import { CardItem } from "../CardItem/CardItem";
@@ -45,6 +47,8 @@ export function ListColumn({
   onOpenComments,
   dndListId,
 }: Props) {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
   // Sortable for the LIST (horizontal sorting handled by parent SortableContext)
   const {
     setNodeRef,
@@ -89,14 +93,19 @@ export function ListColumn({
           className={styles.listTitle}
         />
 
+        {/* Stop propagation so clicking delete doesn't start a drag */}
         <IconButton
           type="button"
           className={styles.deleteList}
-          onClick={() => onDeleteList(list.id)}
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            setConfirmOpen(true);
+          }}
           aria-label="Delete list"
           title="Delete list"
         >
-          …
+          <TrashIcon />
         </IconButton>
       </header>
 
@@ -134,6 +143,25 @@ export function ListColumn({
       >
         + Add another card
       </Button>
+
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Delete list?"
+        description={
+          cards.length > 0
+            ? `This will delete “${list.title || "Untitled"}” and its ${
+                cards.length
+              } card(s). This can't be undone.`
+            : `This will delete “${
+                list.title || "Untitled"
+              }”. This can't be undone.`
+        }
+        confirmText="Delete"
+        cancelText="Cancel"
+        danger
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={() => onDeleteList(list.id)}
+      />
     </section>
   );
 }
@@ -167,7 +195,7 @@ function SortableCard({
     data: { kind: "CARD", cardId: card.id, fromListId },
   });
 
-  // ✅ Stable callback ref to avoid "Cannot access refs during render"
+  // Stable callback ref to avoid "Cannot access refs during render"
   const cardRef = useCallback(
     (node: HTMLElement | null) => {
       setNodeRef(node);
@@ -191,5 +219,23 @@ function SortableCard({
         onOpenComments={onOpenComments}
       />
     </div>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      style={{ display: "block" }}
+    >
+      <path
+        fill="currentColor"
+        d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v10h-2V9zm4 0h2v10h-2V9zM7 9h2v10H7V9zm-1 12h12a2 2 0 0 0 2-2V7H4v12a2 2 0 0 0 2 2z"
+      />
+    </svg>
   );
 }

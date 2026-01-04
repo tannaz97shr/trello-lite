@@ -1,6 +1,7 @@
 "use client";
 
 import { EmptyState } from "@/shared/components/feedback/EmptyState/EmptyState";
+import { Button } from "@/shared/components/ui";
 import {
   DndContext,
   DragEndEvent,
@@ -88,9 +89,9 @@ export function BoardCanvasView({
             )}
           </SortableContext>
 
-          <button type="button" className={styles.addList} onClick={onAddList}>
+          <Button type="button" className={styles.addList} onClick={onAddList}>
             + Add another list
-          </button>
+          </Button>
         </div>
       </main>
     </DndContext>

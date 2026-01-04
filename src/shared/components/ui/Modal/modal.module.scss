@@ -2,25 +2,39 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
+
+  display: grid;
+  place-items: center;
+
+  padding: var(--space-md);
 }
 
 .backdrop {
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgba(0, 0, 0, 0.55);
   cursor: pointer;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
 }
 
 .panel {
   position: relative;
-  margin: 60px auto;
-  width: min(720px, calc(100% - 24px));
-  border-radius: 14px;
-  background: rgba(20, 20, 20, 0.92);
-  color: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
+  width: min(720px, 100%);
+  max-height: min(80vh, 720px);
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: var(--border-width) solid var(--border);
+  color: var(--text);
+
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+
   overflow: hidden;
 }
 
@@ -28,30 +42,50 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: var(--space-sm);
+
+  padding: var(--space-sm) var(--space-md);
+
+  background: var(--panel-muted);
+  border-bottom: var(--border-width) solid var(--border);
 }
 
 .title {
   margin: 0;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .close {
-  border: 0;
-  background: rgba(255, 255, 255, 0.08);
-  color: inherit;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  cursor: pointer;
+  width: 36px;
+  height: 36px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--panel);
+  border: var(--border-width) solid var(--border);
+  color: var(--text);
+
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.14);
+    background: var(--panel-muted);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
+    border-color: var(--accent);
   }
 }
 
 .body {
-  padding: 14px;
+  padding: var(--space-md);
+  overflow: auto;
 }
