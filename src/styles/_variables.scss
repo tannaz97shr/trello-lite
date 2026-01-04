@@ -1,4 +1,21 @@
 :root {
-  --radius: 12px;
-  --gap: 12px;
+  /* spacing scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+
+  /* radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* borders */
+  --border-width: 1px;
+
+  /* transitions */
+  --transition-fast: 120ms ease;
+  --transition-base: 180ms ease;
 }

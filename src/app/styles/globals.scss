@@ -1,6 +1,17 @@
-@use "@/styles/index.scss";
+@use "../../styles/index.scss";
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+/* app shell */
+#root,
+body > div {
+  min-height: 100%;
 }

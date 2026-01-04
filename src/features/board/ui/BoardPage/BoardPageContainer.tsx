@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/store/hooks";
 import { useBoardActions } from "../../hooks/useBoardActions";
 import { selectBoardMeta } from "../../model/selectors";
-import { BoardCanvasContainer } from "../BoardCanvas/BoardCanvasContainer";
+import BoardCanvasClient from "../BoardCanvas/BoardCanvasContainer.client";
 import { CardCommentsModalContainer } from "../CardCommentsModal/CardCommentsModalContainer";
 import { BoardPageView } from "./BoardPageView";
 
@@ -16,7 +16,7 @@ export function BoardPageContainer() {
       boardTitle={board.title}
       onRenameBoard={actions.updateBoardTitle}
     >
-      <BoardCanvasContainer />
+      <BoardCanvasClient />
       <CardCommentsModalContainer />
     </BoardPageView>
   );

@@ -1,11 +1,29 @@
 :root[data-theme="light"] {
-  --bg: #2f7ea7;
-  --panel: rgba(255, 255, 255, 0.1);
-  --text: rgba(255, 255, 255, 0.92);
+  --bg: #f6f8fb;
+  --panel: #ffffff;
+  --panel-muted: #f1f5f9;
+
+  --text: #0f172a;
+  --text-muted: #475569;
+
+  --border: rgba(15, 23, 42, 0.12);
+
+  --accent: #2563eb;
+
+  color-scheme: light;
 }
 
 :root[data-theme="dark"] {
   --bg: #0f172a;
-  --panel: rgba(255, 255, 255, 0.08);
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-muted: rgba(255, 255, 255, 0.04);
+
   --text: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.65);
+
+  --border: rgba(255, 255, 255, 0.12);
+
+  --accent: #60a5fa;
+
+  color-scheme: dark;
 }

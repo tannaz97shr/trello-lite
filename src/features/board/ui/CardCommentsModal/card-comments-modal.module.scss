@@ -1,76 +1,99 @@
 .wrap {
   display: grid;
-  gap: 14px;
+  gap: var(--space-md);
 }
 
 .addRow {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
 }
 
 .input {
   flex: 1;
-  border-radius: 10px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
+
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+
+  border: var(--border-width) solid var(--border);
+  background: var(--panel);
   color: inherit;
+
   outline: none;
 
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
   &:focus {
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
   }
 }
 
 .primary {
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.14);
-  color: inherit;
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-md);
+
+  border: var(--border-width) solid var(--border);
+  background: var(--accent);
+  color: #fff;
+
+  transition: transform var(--transition-fast), filter var(--transition-fast);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    filter: brightness(1.06);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
 .list {
   display: grid;
-  gap: 10px;
+  gap: var(--space-sm);
 }
 
 .comment {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
   align-items: flex-start;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 10px;
+
+  background: var(--panel);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-lg);
+
+  padding: var(--space-sm);
 }
 
 .commentText {
   flex: 1;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.45;
+  color: var(--text);
 }
 
 .danger {
-  border: 0;
-  background: rgba(255, 0, 0, 0.18);
-  color: inherit;
   width: 28px;
   height: 28px;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: var(--radius-sm);
+
+  border: var(--border-width) solid color-mix(in srgb, #ef4444 55%, transparent);
+  background: color-mix(in srgb, #ef4444 18%, transparent);
+  color: inherit;
+
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: rgba(255, 0, 0, 0.28);
+    background: color-mix(in srgb, #ef4444 28%, transparent);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
 .empty {
-  opacity: 0.85;
+  color: var(--text-muted);
   font-size: 13px;
 }

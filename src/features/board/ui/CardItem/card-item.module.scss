@@ -1,46 +1,76 @@
 .card {
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 10px;
+  background: var(--panel);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-md);
+
+  color: var(--text);
+
+  padding: var(--space-sm);
+
   display: grid;
-  gap: 8px;
+  gap: var(--space-xs);
+
+  transition: transform var(--transition-fast),
+    background var(--transition-fast);
+
+  &:hover {
+    background: var(--panel-muted);
+  }
 }
 
 .cardTitle {
   font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
 }
 
 .meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .commentsBtn {
-  border: 0;
-  background: rgba(0, 0, 0, 0.18);
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+
+  background: var(--panel-muted);
+  border: var(--border-width) solid var(--border);
   color: inherit;
-  padding: 6px 8px;
-  border-radius: 8px;
+
   font-size: 12px;
-  cursor: pointer;
+
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.28);
+    background: var(--panel);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
 .danger {
-  border: 0;
-  background: rgba(255, 0, 0, 0.18);
-  color: inherit;
   width: 28px;
   height: 28px;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: var(--radius-sm);
+
+  border: var(--border-width) solid color-mix(in srgb, #ef4444 55%, transparent);
+  background: color-mix(in srgb, #ef4444 18%, transparent);
+  color: inherit;
+
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: rgba(255, 0, 0, 0.28);
+    background: color-mix(in srgb, #ef4444 28%, transparent);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }

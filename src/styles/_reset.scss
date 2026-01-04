@@ -1,12 +1,28 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
+
 html,
 body {
   padding: 0;
   margin: 0;
 }
-button,
-input {
+
+body {
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+input,
+button {
   font: inherit;
+  color: inherit;
 }

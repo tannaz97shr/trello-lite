@@ -1,27 +1,49 @@
+/* src/features/board/ui/BoardCanvas/board-canvas.module.scss */
 .canvas {
   flex: 1;
   overflow: auto;
-  padding: 0 16px 16px;
+  padding: 0 var(--space-md) var(--space-md);
+  margin-top: 2rem;
 }
 
 .lists {
   display: flex;
-  gap: 12px;
+  gap: var(--space-sm);
   align-items: flex-start;
 }
 
 .addList {
   width: 260px;
   min-width: 260px;
-  border-radius: 12px;
-  padding: 10px;
-  border: 0;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.14);
+
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm);
+
+  border: var(--border-width) dashed var(--border);
+  background: var(--panel-muted);
   color: inherit;
+
   text-align: left;
 
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
+
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--panel);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+/* Mobile: trello-style horizontal scroll still works; just tighten spacing a bit */
+@media (max-width: 768px) {
+  .canvas {
+    padding: 0 var(--space-sm) var(--space-sm);
+  }
+
+  .lists {
+    gap: var(--space-xs);
   }
 }

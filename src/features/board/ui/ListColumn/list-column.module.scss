@@ -1,55 +1,83 @@
+/* src/features/board/ui/ListColumn/list-column.module.scss */
 .column {
   width: 260px;
   min-width: 260px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
+
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-sm);
+
+  padding: var(--space-sm);
+  border-radius: var(--radius-lg);
+
+  background: var(--panel);
+  border: var(--border-width) solid var(--border);
 }
 
 .header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-xs);
+
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border-width) solid var(--border);
 }
 
 .listTitle {
   font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .deleteList {
   margin-left: auto;
-  border: 0;
-  background: rgba(0, 0, 0, 0.18);
-  color: inherit;
+
   width: 34px;
   height: 34px;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: var(--radius-md);
+
+  background: var(--panel-muted);
+  border: var(--border-width) solid var(--border);
+  color: inherit;
+
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.28);
+    background: var(--panel);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
 .cards {
   display: grid;
-  gap: 10px;
+  gap: var(--space-sm);
+  padding-top: var(--space-xs);
 }
 
 .addCard {
   margin-top: auto;
-  border: 0;
-  background: rgba(0, 0, 0, 0.18);
+
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+
+  background: var(--panel-muted);
+  border: var(--border-width) solid var(--border);
   color: inherit;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
+
   text-align: left;
 
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
+
   &:hover {
-    background: rgba(0, 0, 0, 0.28);
+    background: var(--panel);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
