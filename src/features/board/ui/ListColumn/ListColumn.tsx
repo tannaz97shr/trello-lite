@@ -18,6 +18,8 @@ import { CardItem } from "../CardItem/CardItem";
 import { InlineTitle } from "../InlineTitle/InlineTitle";
 import styles from "./list-column.module.scss";
 
+type ListOption = { id: ListId; title: string };
+
 type Props = {
   list: ListEntity;
   cards: CardEntity[];
@@ -30,6 +32,10 @@ type Props = {
   onRenameCard: (cardId: CardId, title: string) => void;
   onDeleteCard: (cardId: CardId) => void;
   onOpenComments: (cardId: CardId) => void;
+
+  /** for mobile status-change */
+  allLists: ListOption[];
+  onMoveCard: (cardId: CardId, toListId: ListId) => void;
 
   /** DnD list id: "list:<id>" */
   dndListId: string;
@@ -46,10 +52,11 @@ export function ListColumn({
   onDeleteCard,
   onOpenComments,
   dndListId,
+  allLists,
+  onMoveCard,
 }: Props) {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  // Sortable for the LIST (horizontal sorting handled by parent SortableContext)
   const {
     setNodeRef,
     attributes,
@@ -76,7 +83,6 @@ export function ListColumn({
     opacity: isDragging ? 0.7 : 1,
   } as const;
 
-  // Cards are sortable within this list (vertical sorting)
   const dndCardIds = useMemo(
     () => cards.map((c) => toDndCardId(c.id)),
     [cards]
@@ -126,6 +132,8 @@ export function ListColumn({
                 card={card}
                 fromListId={list.id}
                 commentCount={commentCountByCardId[card.id] ?? 0}
+                allLists={allLists}
+                onMoveCard={onMoveCard}
                 onRename={onRenameCard}
                 onDelete={onDeleteCard}
                 onOpenComments={onOpenComments}
@@ -170,6 +178,8 @@ function SortableCard({
   card,
   fromListId,
   commentCount,
+  allLists,
+  onMoveCard,
   onRename,
   onDelete,
   onOpenComments,
@@ -177,6 +187,10 @@ function SortableCard({
   card: CardEntity;
   fromListId: ListId;
   commentCount: number;
+
+  allLists: ListOption[];
+  onMoveCard: (cardId: CardId, toListId: ListId) => void;
+
   onRename: (cardId: CardId, title: string) => void;
   onDelete: (cardId: CardId) => void;
   onOpenComments: (cardId: CardId) => void;
@@ -214,6 +228,9 @@ function SortableCard({
       <CardItem
         card={card}
         commentCount={commentCount}
+        currentListId={fromListId}
+        lists={allLists}
+        onMove={onMoveCard}
         onRename={onRename}
         onDelete={onDelete}
         onOpenComments={onOpenComments}

@@ -17,7 +17,6 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error) {
-    // TODO : report to logging service
     console.error(error);
   }
 
