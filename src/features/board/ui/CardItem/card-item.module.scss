@@ -1,0 +1,46 @@
+.card {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.cardTitle {
+  font-size: 13px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.commentsBtn {
+  border: 0;
+  background: rgba(0, 0, 0, 0.18);
+  color: inherit;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.28);
+  }
+}
+
+.danger {
+  border: 0;
+  background: rgba(255, 0, 0, 0.18);
+  color: inherit;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 0, 0, 0.28);
+  }
+}

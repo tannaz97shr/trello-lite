@@ -1,0 +1,56 @@
+.page {
+  min-height: 100vh;
+  background: #2f7ea7; /* مثل trello-ish */
+  color: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  padding: 14px 16px;
+}
+
+.boardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  max-width: 420px;
+}
+
+.canvas {
+  flex: 1;
+  overflow: auto;
+  padding: 0 16px 16px;
+}
+
+.lists {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.addList {
+  width: 260px;
+  min-width: 260px;
+  border-radius: 12px;
+  padding: 10px;
+  border: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Responsive: on small screens, allow horizontal scroll (Trello style) */
+@media (max-width: 768px) {
+  .boardTitle {
+    max-width: 100%;
+  }
+
+  .lists {
+    gap: 10px;
+  }
+}

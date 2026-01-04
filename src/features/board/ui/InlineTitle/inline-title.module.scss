@@ -1,0 +1,26 @@
+.view {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: text;
+}
+
+.viewText {
+  display: block;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  outline: none;
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}

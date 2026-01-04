@@ -1,0 +1,57 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.panel {
+  position: relative;
+  margin: 60px auto;
+  width: min(720px, calc(100% - 24px));
+  border-radius: 14px;
+  background: rgba(20, 20, 20, 0.92);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.close {
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+.body {
+  padding: 14px;
+}

@@ -1,0 +1,76 @@
+.wrap {
+  display: grid;
+  gap: 14px;
+}
+
+.addRow {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  outline: none;
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+}
+
+.primary {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.comment {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.commentText {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.danger {
+  border: 0;
+  background: rgba(255, 0, 0, 0.18);
+  color: inherit;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 0, 0, 0.28);
+  }
+}
+
+.empty {
+  opacity: 0.85;
+  font-size: 13px;
+}
