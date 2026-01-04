@@ -13,12 +13,14 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useMemo } from "react";
 import { toDndListId } from "../../lib/dnd/ids";
 import type { CardEntity, CardId, ListEntity, ListId } from "../../model/types";
 import { ListColumn } from "../ListColumn/ListColumn";
 import styles from "./board-canvas.module.scss";
 
 type Column = { list: ListEntity; cards: CardEntity[] };
+type ListOption = { id: ListId; title: string };
 
 type Props = {
   columns: Column[];
@@ -33,6 +35,10 @@ type Props = {
   onRenameCard: (cardId: CardId, title: string) => void;
   onDeleteCard: (cardId: CardId) => void;
   onOpenComments: (cardId: CardId) => void;
+
+  /** NEW: for mobile move/status button */
+  allLists: ListOption[];
+  onMoveCard: (cardId: CardId, toListId: ListId) => void;
 };
 
 export function BoardCanvasView({
@@ -46,12 +52,17 @@ export function BoardCanvasView({
   onRenameCard,
   onDeleteCard,
   onOpenComments,
+  allLists,
+  onMoveCard,
 }: Props) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } })
   );
 
-  const listIds = columns.map((c) => toDndListId(c.list.id));
+  const listIds = useMemo(
+    () => columns.map((c) => toDndListId(c.list.id)),
+    [columns]
+  );
 
   return (
     <DndContext sensors={sensors} onDragEnd={onDragEnd}>
@@ -68,17 +79,15 @@ export function BoardCanvasView({
                   list={list}
                   cards={cards}
                   commentCountByCardId={commentCountByCardId}
-                  // list header actions
                   onRenameList={onRenameList}
                   onDeleteList={onDeleteList}
-                  // card actions
                   onAddCard={onAddCard}
                   onRenameCard={onRenameCard}
                   onDeleteCard={onDeleteCard}
                   onOpenComments={onOpenComments}
-                  // DnD ids for internals
                   dndListId={toDndListId(list.id)}
-                  // dndCardIds={cards.map((c) => toDndCardId(c.id))}
+                  allLists={allLists}
+                  onMoveCard={onMoveCard}
                 />
               ))
             ) : (
