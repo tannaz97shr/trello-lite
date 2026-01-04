@@ -1,0 +1,11 @@
+:root[data-theme="light"] {
+  --bg: #2f7ea7;
+  --panel: rgba(255, 255, 255, 0.1);
+  --text: rgba(255, 255, 255, 0.92);
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --panel: rgba(255, 255, 255, 0.08);
+  --text: rgba(255, 255, 255, 0.92);
+}
