@@ -57,20 +57,22 @@ No UI libraries. No magic.
 
 ## 📁 Project Structure (simplified)
 
+```
 src/
-├─ app/ # Next.js app router
+├─ app/                     # Next.js app router
 ├─ features/
-│ ├─ board/ # Board domain (lists, cards, comments)
-│ └─ theme/ # Theme feature (light / dark)
+│  ├─ board/                # Board domain (lists, cards, comments)
+│  └─ theme/                # Theme feature (light / dark)
 ├─ shared/
-│ ├─ components/ # Reusable UI & feedback components
-│ ├─ hooks/ # Shared hooks
-│ └─ hoc/ # Error boundary, guards, etc.
+│  ├─ components/           # Reusable UI & feedback components
+│  ├─ hooks/                # Shared hooks
+│  └─ hoc/                  # Error boundary, guards, etc.
 ├─ core/
-│ ├─ storage/ # LocalStorage abstraction & keys
-│ ├─ errors/ # Error mapping & messages
-│ └─ utils/ # Small helpers
-├─ styles/ # Global styles, tokens, themes
+│  ├─ storage/              # LocalStorage abstraction & keys
+│  ├─ errors/               # Error mapping & messages
+│  └─ utils/                # Small helpers
+├─ styles/                  # Global styles, tokens, themes
+```
 
 ---
 
@@ -124,12 +126,16 @@ So cards also support:
 
 ## 🚀 Getting Started
 
+```
 npm install
 npm run dev
+```
 
 Open:
 
+```
 http://localhost:3000
+```
 
 ---
 
