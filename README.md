@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trello Lite 🧩
 
-## Getting Started
+A small, clean Trello-like board built for interview and demonstration purposes.  
+Focused on **architecture, clean code, and UX**, not backend complexity.
 
-First, run the development server:
+This project intentionally avoids a real API and persists everything locally, so the emphasis stays on **frontend engineering quality**.
 
-```bash
+---
+
+## ✨ Features
+
+- 📋 Board with multiple lists (columns)
+- 🧱 Cards inside lists
+- ✏️ Inline editing (list titles & card titles)
+- ➕ Create / 🗑️ delete lists and cards (with confirmation)
+- 💬 Card comments (modal-based)
+- 🔄 Move cards between lists
+  - Drag & drop (desktop)
+  - Explicit “Move” action (mobile-friendly)
+- 🌗 Light / Dark theme toggle
+- 💾 Local persistence via `localStorage`
+- 🦴 Skeleton loading state
+- 🧯 Error boundaries for graceful failures
+
+---
+
+## 🧠 Design Goals
+
+This project is intentionally opinionated:
+
+- Clean architecture
+- Separation of concerns
+- Readable naming
+- Predictable state
+- Safe runtime behavior
+
+It is **not** meant to be:
+
+- A pixel-perfect Trello clone
+- Backend-heavy
+- Feature-bloated
+
+---
+
+## 🏗️ Tech Stack
+
+- **Next.js (App Router)**
+- **React + TypeScript**
+- **Redux Toolkit**
+- **SCSS Modules**
+- **@dnd-kit** (drag & drop)
+- **LocalStorage** (persistence)
+
+No UI libraries. No magic.
+
+---
+
+## 📁 Project Structure (simplified)
+
+src/
+├─ app/ # Next.js app router
+├─ features/
+│ ├─ board/ # Board domain (lists, cards, comments)
+│ └─ theme/ # Theme feature (light / dark)
+├─ shared/
+│ ├─ components/ # Reusable UI & feedback components
+│ ├─ hooks/ # Shared hooks
+│ └─ hoc/ # Error boundary, guards, etc.
+├─ core/
+│ ├─ storage/ # LocalStorage abstraction & keys
+│ ├─ errors/ # Error mapping & messages
+│ └─ utils/ # Small helpers
+├─ styles/ # Global styles, tokens, themes
+
+---
+
+## 🎯 State Management
+
+- **Redux Toolkit** for board data and theme
+- **Normalized state** (entities + ids)
+- UI-only state (modals, inline edit) lives locally
+- Derived data via **memoized selectors**
+
+---
+
+## 💾 Persistence Strategy
+
+- Board state is saved to `localStorage`
+- On load:
+  - State is **validated at runtime**
+  - Corrupted or incompatible data is discarded safely
+- Prevents crashes caused by stale persisted data
+
+---
+
+## 🧪 Error Handling
+
+- Global `ErrorBoundary` wraps the board
+- UI remains usable even if a component fails
+- Confirmation dialogs protect destructive actions
+
+---
+
+## 📱 Mobile Considerations
+
+Drag & drop is great on desktop, painful on mobile.
+
+So cards also support:
+
+- Explicit “Move” action
+- Modal-based list selection
+- Fully usable without drag gestures
+
+---
+
+## 🎨 Styling & Theming
+
+- SCSS Modules
+- Design tokens (`--bg`, `--panel`, `--text`, etc.)
+- Theme applied via `data-theme` on `<html>`
+- No hardcoded colors in components
+
+---
+
+## 🚀 Getting Started
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📝 Notes
 
-To learn more about Next.js, take a look at the following resources:
+- Optimized for **readability and discussion**
+- Architectural decisions are intentional
+- Easy to extend with:
+  - Backend API
+  - Auth
+  - Real-time updates
+  - Multi-board support
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🙌 Why This Exists
 
-## Deploy on Vercel
+This is not “yet another Trello clone”.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+It’s a **conversation piece**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- for interviews
+- for code reviews
+- for showing how you think, not just what you build
