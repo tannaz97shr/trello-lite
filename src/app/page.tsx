@@ -1,10 +1,5 @@
-import { BoardPageContainer } from "@/features/board/ui/BoardPage/BoardPageContainer";
-import { ErrorBoundary } from "@/shared/components/feedback/ErrorBoundary/ErrorBoundary";
+import BoardClient from "./BoardClient";
 
 export default function Page() {
-  return (
-    <ErrorBoundary>
-      <BoardPageContainer />
-    </ErrorBoundary>
-  );
+  return <BoardClient />;
 }

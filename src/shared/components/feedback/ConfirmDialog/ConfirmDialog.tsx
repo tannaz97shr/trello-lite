@@ -1,9 +1,11 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/Button/Button";
-import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./confirm-dialog.module.scss";
+
+import { Button } from "@/shared/components/ui/Button/Button";
+import { useEventListener } from "@/shared/hooks/useEventListener";
+import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
 
 type Props = {
   open: boolean;
@@ -28,16 +30,14 @@ export function ConfirmDialog({
 }: Props) {
   const panelRef = useRef<HTMLDivElement | null>(null);
 
+  // close on outside click
   useOutsideClick(panelRef, onClose, open);
 
-  useEffect(() => {
+  // close on Escape
+  useEventListener("keydown", (e) => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+    if (e.key === "Escape") onClose();
+  });
 
   if (!open) return null;
 
@@ -45,12 +45,14 @@ export function ConfirmDialog({
     <div className={styles.backdrop} role="dialog" aria-modal="true">
       <div className={styles.panel} ref={panelRef}>
         <div className={styles.title}>{title}</div>
+
         {description ? <div className={styles.desc}>{description}</div> : null}
 
         <div className={styles.actions}>
           <Button variant="ghost" onClick={onClose}>
             {cancelText}
           </Button>
+
           <Button
             variant={danger ? "danger" : "primary"}
             onClick={() => {
