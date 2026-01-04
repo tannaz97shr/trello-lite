@@ -1,8 +1,19 @@
 "use client";
+
 import styles from "./skeleton.module.scss";
 
-export function Skeleton({ className }: { className?: string }) {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
+  radius?: "sm" | "md" | "lg";
+};
+
+export function Skeleton({ className, radius = "md", ...props }: Props) {
   return (
-    <div className={[styles.skeleton, className].filter(Boolean).join(" ")} />
+    <div
+      {...props}
+      className={[styles.skeleton, styles[radius], className]
+        .filter(Boolean)
+        .join(" ")}
+      aria-hidden="true"
+    />
   );
 }

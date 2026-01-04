@@ -1,5 +1,6 @@
 "use client";
 
+import { EmptyState } from "@/shared/components/feedback/EmptyState/EmptyState";
 import {
   DndContext,
   DragEndEvent,
@@ -59,25 +60,32 @@ export function BoardCanvasView({
             items={listIds}
             strategy={horizontalListSortingStrategy}
           >
-            {columns.map(({ list, cards }) => (
-              <ListColumn
-                key={list.id}
-                list={list}
-                cards={cards}
-                commentCountByCardId={commentCountByCardId}
-                // list header actions
-                onRenameList={onRenameList}
-                onDeleteList={onDeleteList}
-                // card actions
-                onAddCard={onAddCard}
-                onRenameCard={onRenameCard}
-                onDeleteCard={onDeleteCard}
-                onOpenComments={onOpenComments}
-                // DnD ids for internals
-                dndListId={toDndListId(list.id)}
-                // dndCardIds={cards.map((c) => toDndCardId(c.id))}
+            {columns.length ? (
+              columns.map(({ list, cards }) => (
+                <ListColumn
+                  key={list.id}
+                  list={list}
+                  cards={cards}
+                  commentCountByCardId={commentCountByCardId}
+                  // list header actions
+                  onRenameList={onRenameList}
+                  onDeleteList={onDeleteList}
+                  // card actions
+                  onAddCard={onAddCard}
+                  onRenameCard={onRenameCard}
+                  onDeleteCard={onDeleteCard}
+                  onOpenComments={onOpenComments}
+                  // DnD ids for internals
+                  dndListId={toDndListId(list.id)}
+                  // dndCardIds={cards.map((c) => toDndCardId(c.id))}
+                />
+              ))
+            ) : (
+              <EmptyState
+                title="No lists yet"
+                description="Create your first list to get started."
               />
-            ))}
+            )}
           </SortableContext>
 
           <button type="button" className={styles.addList} onClick={onAddList}>

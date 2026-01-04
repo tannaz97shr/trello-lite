@@ -1,5 +1,6 @@
 "use client";
 
+import { IconButton } from "@/shared/components/ui/IconButton/IconButton";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { selectThemeMode } from "../model/selectors";
 import { themeActions } from "../model/themeSlice";
@@ -10,7 +11,7 @@ export function ThemeToggleIconButton() {
   const dispatch = useAppDispatch();
 
   return (
-    <button
+    <IconButton
       type="button"
       className={styles.btn}
       aria-label="Toggle theme"
@@ -18,6 +19,6 @@ export function ThemeToggleIconButton() {
       onClick={() => dispatch(themeActions.toggleTheme())}
     >
       {mode === "dark" ? "☾" : "☀︎"}
-    </button>
+    </IconButton>
   );
 }

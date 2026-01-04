@@ -1,5 +1,6 @@
 "use client";
 
+import { IconButton } from "@/shared/components/ui/IconButton/IconButton";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./modal.module.scss";
@@ -20,7 +21,7 @@ export function Modal({ isOpen, title, onClose, children }: Props) {
     };
 
     document.addEventListener("keydown", onKeyDown);
-    // prevent background scroll
+
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -41,13 +42,22 @@ export function Modal({ isOpen, title, onClose, children }: Props) {
         aria-label="Close modal"
         onClick={onClose}
       />
+
       <div className={styles.panel}>
         <div className={styles.header}>
           {title ? <h2 className={styles.title}>{title}</h2> : <div />}
-          <button type="button" className={styles.close} onClick={onClose}>
+
+          <IconButton
+            type="button"
+            className={styles.close}
+            onClick={onClose}
+            aria-label="Close"
+            title="Close"
+          >
             ✕
-          </button>
+          </IconButton>
         </div>
+
         <div className={styles.body}>{children}</div>
       </div>
     </div>,

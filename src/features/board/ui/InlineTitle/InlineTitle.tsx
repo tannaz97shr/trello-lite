@@ -1,8 +1,11 @@
 "use client";
 
+import { Button } from "@/shared/components/ui/Button/Button";
+import { Input } from "@/shared/components/ui/Input/Input";
 import { useEffect, useRef } from "react";
 import { useInlineEdit } from "../../hooks/useInlineEdit";
 import styles from "./inline-title.module.scss";
+
 type Props = {
   value: string;
   placeholder?: string;
@@ -30,8 +33,9 @@ export function InlineTitle({
 
   if (!e.isEditing) {
     return (
-      <button
+      <Button
         type="button"
+        variant="ghost"
         className={[styles.view, className].filter(Boolean).join(" ")}
         onClick={e.start}
         onDoubleClick={e.start}
@@ -40,16 +44,17 @@ export function InlineTitle({
         <span className={styles.viewText}>
           {value || placeholder || "Untitled"}
         </span>
-      </button>
+      </Button>
     );
   }
 
   return (
-    <input
+    <Input
       ref={inputRef}
       className={[styles.input, className].filter(Boolean).join(" ")}
       value={e.draft}
       placeholder={placeholder}
+      aria-label={ariaLabel ?? "Title"}
       onChange={(ev) => e.setDraft(ev.target.value)}
       onBlur={e.commit}
       onKeyDown={(ev) => {

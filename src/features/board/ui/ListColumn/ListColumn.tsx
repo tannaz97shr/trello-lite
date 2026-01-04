@@ -1,4 +1,3 @@
-// src/features/board/ui/ListColumn/ListColumn.tsx
 "use client";
 
 import {
@@ -9,6 +8,8 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { useCallback, useMemo } from "react";
 
+import { EmptyState } from "@/shared/components/feedback/EmptyState/EmptyState";
+import { Button, IconButton } from "@/shared/components/ui";
 import { toDndCardId } from "../../lib/dnd/ids";
 import type { CardEntity, CardId, ListEntity, ListId } from "../../model/types";
 import { CardItem } from "../CardItem/CardItem";
@@ -57,7 +58,7 @@ export function ListColumn({
     data: { kind: "LIST", listId: list.id },
   });
 
-  // ✅ Stable callback ref to avoid "Cannot access refs during render"
+  // Stable callback ref to avoid "Cannot access refs during render"
   const listRef = useCallback(
     (node: HTMLElement | null) => {
       setNodeRef(node);
@@ -88,7 +89,7 @@ export function ListColumn({
           className={styles.listTitle}
         />
 
-        <button
+        <IconButton
           type="button"
           className={styles.deleteList}
           onClick={() => onDeleteList(list.id)}
@@ -96,7 +97,7 @@ export function ListColumn({
           title="Delete list"
         >
           …
-        </button>
+        </IconButton>
       </header>
 
       <SortableContext
@@ -104,27 +105,35 @@ export function ListColumn({
         strategy={verticalListSortingStrategy}
       >
         <div className={styles.cards}>
-          {cards.map((card) => (
-            <SortableCard
-              key={card.id}
-              card={card}
-              fromListId={list.id}
-              commentCount={commentCountByCardId[card.id] ?? 0}
-              onRename={onRenameCard}
-              onDelete={onDeleteCard}
-              onOpenComments={onOpenComments}
+          {cards.length === 0 ? (
+            <EmptyState
+              title="No cards"
+              description="Add a card to start tracking work."
             />
-          ))}
+          ) : (
+            cards.map((card) => (
+              <SortableCard
+                key={card.id}
+                card={card}
+                fromListId={list.id}
+                commentCount={commentCountByCardId[card.id] ?? 0}
+                onRename={onRenameCard}
+                onDelete={onDeleteCard}
+                onOpenComments={onOpenComments}
+              />
+            ))
+          )}
         </div>
       </SortableContext>
 
-      <button
+      <Button
         type="button"
+        variant="ghost"
         className={styles.addCard}
         onClick={() => onAddCard(list.id)}
       >
         + Add another card
-      </button>
+      </Button>
     </section>
   );
 }

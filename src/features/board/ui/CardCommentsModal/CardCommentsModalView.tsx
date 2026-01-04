@@ -1,6 +1,11 @@
 "use client";
 
+import { EmptyState } from "@/shared/components/feedback/EmptyState/EmptyState";
+import { Button } from "@/shared/components/ui/Button/Button";
+import { IconButton } from "@/shared/components/ui/IconButton/IconButton";
+import { Input } from "@/shared/components/ui/Input/Input";
 import { Modal } from "@/shared/components/ui/Modal/Modal";
+
 import type { CommentEntity, CommentId } from "../../model/types";
 import styles from "./card-comments-modal.module.scss";
 
@@ -32,11 +37,14 @@ export function CardCommentsModalView({
   return (
     <Modal isOpen={isOpen} title={title} onClose={onClose}>
       {!hasActiveCard ? (
-        <div className={styles.empty}>No active card selected.</div>
+        <EmptyState
+          title="No active card selected"
+          description="Open a card to view and add comments."
+        />
       ) : (
         <div className={styles.wrap}>
           <div className={styles.addRow}>
-            <input
+            <Input
               className={styles.input}
               value={draft}
               placeholder="Write a comment…"
@@ -45,19 +53,30 @@ export function CardCommentsModalView({
                 if (e.key === "Enter") onAdd();
               }}
             />
-            <button type="button" className={styles.primary} onClick={onAdd}>
+
+            <Button
+              type="button"
+              variant="primary"
+              className={styles.primary}
+              onClick={onAdd}
+              disabled={!draft.trim()}
+            >
               Add
-            </button>
+            </Button>
           </div>
 
           <div className={styles.list}>
             {comments.length === 0 ? (
-              <div className={styles.empty}>No comments yet.</div>
+              <EmptyState
+                title="No comments yet"
+                description="Add the first comment above."
+              />
             ) : (
               comments.map((c) => (
                 <div key={c.id} className={styles.comment}>
                   <div className={styles.commentText}>{c.text}</div>
-                  <button
+
+                  <IconButton
                     type="button"
                     className={styles.danger}
                     onClick={() => onDelete(c.id)}
@@ -65,7 +84,7 @@ export function CardCommentsModalView({
                     title="Delete comment"
                   >
                     ✕
-                  </button>
+                  </IconButton>
                 </div>
               ))
             )}

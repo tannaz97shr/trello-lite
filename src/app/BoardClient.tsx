@@ -1,10 +1,12 @@
 "use client";
 
 import { BoardPageContainer } from "@/features/board/ui/BoardPage/BoardPageContainer";
-import { withErrorBoundary } from "@/shared/hoc/withErrorBoundary";
-
-const SafeBoard = withErrorBoundary(BoardPageContainer);
+import { ErrorBoundary } from "@/shared/components/feedback/ErrorBoundary/ErrorBoundary";
 
 export default function BoardClient() {
-  return <SafeBoard />;
+  return (
+    <ErrorBoundary>
+      <BoardPageContainer />
+    </ErrorBoundary>
+  );
 }
